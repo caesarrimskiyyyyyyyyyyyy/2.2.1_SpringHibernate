@@ -9,31 +9,35 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import java.sql.SQLException;
 
 public class MainApp {
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) {
         AnnotationConfigApplicationContext context =
                 new AnnotationConfigApplicationContext(AppConfig.class);
 
+        User userFirst = new User("Tony", "Soprano", "panicattack@gmail.com");
+        User userSecond = new User("Christopher", "Moltisanti", "babysoldier@gmail.com");
+        User userThird = new User("Silvio", "Dante", "outlawz@gmail.ru");
+
+        userFirst.setCar(new Car(654, "Cadillac escalade"));
+        userSecond.setCar(new Car(789, "Mercedes-Benz CLK 430"));
+        userThird.setCar(new Car(122, "Cadillac Seville"));
+
         UserService userService = context.getBean(UserService.class);
 
-        Car carFirst = new Car(654, "MB");
-        Car carSecond = new Car(789, "BW");
-        Car carThird = new Car(122, "AD");
-
-        User user1 = new User("Tony", "Soprano", "panicattack@gmail.com");
-        User user2 = new User("Christopher", "Moltisanti", "babysoldier@gmail.com");
-        User user3 = new User("Silvio", "Dante", "outlawz@gmail.ru");
-
-        user1.setCar(carFirst);
-        user2.setCar(carSecond);
-        user3.setCar(carThird);
-
-        userService.add(user1);
-        userService.add(user2);
-        userService.add(user3);
+        userService.add(userFirst);
+        userService.add(userSecond);
+        userService.add(userThird);
 
         userService.listUsers().stream()
-                .map(entry -> String.format("%s : %s", entry.getFirstName(), entry.getCar().getModel()))
+                .map(entry -> String.format(
+                        "%s %s : %s",
+                        entry.getFirstName(),
+                        entry.getLastName(),
+                        entry.getCar().getModel()
+                ))
                 .forEach(System.out::println);
+
+        System.out.println("\nвладелец машины: "
+                + userService.getUser(789, "Mercedes-Benz CLK 430").getFirstName());
 
         context.close();
     }

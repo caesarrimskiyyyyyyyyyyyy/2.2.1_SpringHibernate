@@ -2,6 +2,7 @@ package hiber.service;
 
 import hiber.dao.UserDao;
 import hiber.model.User;
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,8 +11,12 @@ import java.util.List;
 
 @Service
 public class UserServiceImp implements UserService {
+    private final UserDao userDao;
+
     @Autowired
-    private UserDao userDao;
+    public UserServiceImp(UserDao userDao) {
+        this.userDao = userDao;
+    }
 
     @Transactional
     @Override
@@ -23,5 +28,11 @@ public class UserServiceImp implements UserService {
     @Override
     public List<User> listUsers() {
         return userDao.listUsers();
+    }
+
+    @Transactional
+    @Override
+    public User getUser(long series, String model) {
+        return userDao.getUser(series, model);
     }
 }

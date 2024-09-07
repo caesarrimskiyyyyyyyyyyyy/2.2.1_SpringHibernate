@@ -12,7 +12,7 @@ import javax.persistence.JoinColumn;
 public class Car {
     @Id
     @Column(name = "series")
-    private int series;
+    private long series;
 
     @Column(name = "model")
     private String model;
@@ -29,7 +29,7 @@ public class Car {
         this.model = model;
     }
 
-    public int getSeries() {
+    public long getSeries() {
         return series;
     }
 
