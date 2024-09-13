@@ -1,6 +1,14 @@
 package hiber.model;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.OneToOne;
+import javax.persistence.FetchType;
 
 @Entity
 @Table(name = "users")
