@@ -17,9 +17,9 @@ public class MainApp {
         User userSecond = new User("Christopher", "Moltisanti", "babysoldier@gmail.com");
         User userThird = new User("Silvio", "Dante", "outlawz@gmail.ru");
 
-        userFirst.setCar(new Car(654, "Cadillac escalade"));
-        userSecond.setCar(new Car(789, "Mercedes-Benz CLK 430"));
-        userThird.setCar(new Car(122, "Cadillac Seville"));
+        userFirst.addCar(new Car(654, "Cadillac escalade"));
+        userSecond.addCar(new Car(789, "Mercedes-Benz CLK 430"));
+        userThird.addCar(new Car(122, "Cadillac Seville"));
 
         UserService userService = context.getBean(UserService.class);
 
@@ -36,7 +36,7 @@ public class MainApp {
                 ))
                 .forEach(System.out::println);
 
-        System.out.println("\nвладелец машины: "
+        System.out.println("\nOwner car: "
                 + userService.getUser(789, "Mercedes-Benz CLK 430").getFirstName());
 
         context.close();
