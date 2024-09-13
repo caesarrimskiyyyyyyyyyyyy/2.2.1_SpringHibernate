@@ -31,12 +31,12 @@ public class UserDaoImp implements UserDao {
     }
 
     @Override
-    public User getUser(long series, String model) {
+    public User getUserByMachine(long series, String model) {
         return (User) sessionFactory
                 .getCurrentSession()
                 .createQuery("from User us join fetch us.car where us.car.model = :model and us.car.series = :series")
                 .setParameter("model", model)
                 .setParameter("series", series)
-                .uniqueResult();
+                .getSingleResult();
     }
 }

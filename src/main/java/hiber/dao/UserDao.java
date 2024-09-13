@@ -9,5 +9,5 @@ public interface UserDao {
 
     List<User> listUsers();
 
-    User getUser(long series, String model);
+    User getUserByMachine(long series, String model);
 }
